@@ -1,3 +1,21 @@
+(function(win, doc) {
+	var h;
+	win.addEventListener('resize', function() {
+		clearTimeout(h);
+		h = setTimeout(setUnitA, 300);
+	}, false);
+	win.addEventListener('pageshow', function(e) {
+		if (e.persisted) {
+			clearTimeout(h);
+			h = setTimeout(setUnitA, 300);
+		}
+	}, false);
+	var setUnitA = function() {
+		doc.documentElement.style.fontSize = doc.documentElement.clientWidth / 32 + 'px';
+	};
+	setUnitA();
+})(window, document);
+
 $(document).on('touchmove',function(ev){
 	ev.preventDefault();
 });
@@ -5,7 +23,7 @@ $(function(){
 	var $main = $('#main');
 	var $li=$('#list').children('li');
 	var viewHeight=$(window).height();
-	
+
 	$main.css({'height':viewHeight,'width':'100%'});
 	
 	//划动页面;
@@ -70,6 +88,10 @@ $(function(){
 			$li.css('transform','');
 			$li.css('transition','');
 			$li.eq(nextorprevIndex).removeClass('zIndex').siblings().hide();
+
+			//$("#li2Child").attr('id','li2Child1');
+			//$(this).attr("id", ++i);
+			//this.firstElementChild.id = "a"+this.index;
 			bBtn = true;
 		}
 	}
@@ -80,7 +102,7 @@ $(function(){
 		return w;
 	}
 	
-	var cjAnimate=[
+	/*var cjAnimate=[
 		{
 			inAn:function(){
 				var $img=$('.li1Child').find('>img');
@@ -107,5 +129,5 @@ $(function(){
 		},
 	];
 	cjAnimate[0].outAn();
-	cjAnimate[0].inAn();
+	cjAnimate[0].inAn();*/
 });
